@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import yelp from './api/yelp'
 const proxyurl = "https://cors-anywhere.herokuapp.com/";
-const API_KEY = 'x68ehD304kcLEPghRkGIIAS4gOy8eClKNUmU_0CrGhWmyEgxx4TNhfGJd8-ZOu0cv560-bbveB2c2V4zBQxxURVXudiubzNdinuzVMV5nqNhmQ6FoxDKb4NzJRLUX3Yx'
+const API_KEY = process.env.API_KEY
 const YELP_URL = proxyurl + "https://api.yelp.com/v3/businesses";
 const baseURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3"
 const locationSearched = "Philadelphia";
