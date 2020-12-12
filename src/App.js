@@ -1,9 +1,6 @@
 import axios from "axios";
 import React from "react";
-import yelp from './api/yelp'
-const proxyurl = "https://cors-anywhere.herokuapp.com/";
-const API_KEY = process.env.API_KEY
-const YELP_URL = proxyurl + "https://api.yelp.com/v3/businesses";
+// import yelp from './api/yelp'
 const baseURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3"
 const locationSearched = "Philadelphia";
 
@@ -17,10 +14,10 @@ class App extends React.Component {
     const response = await axios.get(`${baseURL}/businesses/search?location=philadelphia`, {
     headers: {
       'Access-Control-Allow-Origin': '*',
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
     }
     })
-    console.log('response', response.data.businesses)
+    console.log('response', response.data.businesses[0])
   };
 
 
