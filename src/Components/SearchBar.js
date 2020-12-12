@@ -9,10 +9,14 @@ class SearchBar extends React.Component {
 
     onFormSubmit = (event) => {
         event.preventDefault()
-        this.props.onFormSubmit(this.state.term)
+        this.props.onFormSubmit(this.state.category)
         // TODO: call callback from parent component
+        this.clearForm()
     }
 
+    clearForm = () => {
+        this.setState({ category: '' })
+    }
     render() {
         return (
             <div className="search-bar ui segment">
@@ -21,6 +25,7 @@ class SearchBar extends React.Component {
                         <label>What type of food do you want to eat?</label>
                         <input 
                         type="text" 
+                        placeholder="Vietnamese, Indonesian, Pizza, etc..."
                         value={this.state.category}
                         onChange={this.onInputChange}
                         />

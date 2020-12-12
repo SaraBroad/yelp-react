@@ -2,48 +2,67 @@ import "./App.css";
 import React from "react";
 import axios from "axios";
 import SearchBar from "./Components/SearchBar.js";
-// import yelp from './api/yelp'
+import RestaurantList from './Components/RestaurantList'
 const baseURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3";
-const locationSearched = "Philadelphia";
 
 class App extends React.Component {
   state = {
-    foodEstablishment: [],
+    foodEstablishments: [],
     selectedFoodEstablishment: null,
+    isLoading: false,
+    error: null
   };
 
   componentDidMount() {
-    // this.getSelectedRestaurants('Philadelphia')
+      // if (this.state.foodEstablishments.length < 1) {
+        this.onCategorySubmit('')
+      // }
   }
 
-  onSearchSubmit = async (location) => {
+  onCategorySubmit = async (term) => {
+    console.log('term', term)
     const response = await axios.get(
-      `${baseURL}/businesses/search?location=philadelphia`,
-      {
+      `${baseURL}/businesses/search?location=philadelphia&categories=${term}&limit=10`,
+        {
         headers: {
+          mode: 'no-cors',
           "Access-Control-Allow-Origin": "*",
+          "Content-Type":"application/json",
+          "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
           Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
         },
         params: {
-
+          _limit: 10
         }
       }
     );
-    console.log("response", response.data.businesses[0]);
+    console.log("response", response.data.businesses);
+    this.setState({
+      foodEstablishments: response.data.businesses
+    })
+    console.log('fe', this.state.foodEstablishments)
   };
 
+  // onFoodEstablishmentSelect = (establishment) => {
+  //   console.log("from the app", establishment)
+  //   this.setState({ selectedFoodEstablishment: establishment })
+  // }
   // transactions - delivery or pickup
 
   render() {
     return (
       <div className="ui container">
         <h4
-          className="ui header"
-          style={{ fontSize: "40px", textAlign: "center", marginTop: "16px" }}>
+          className="ui header" style={{ fontSize: "40px", textAlign: "center", marginTop: "16px" }}>
           COVID Food Finder
         </h4>
-
-        <SearchBar onSearchSubmit={this.onSearchSubmit} />
+        <div>
+          <SearchBar onFormSubmit={this.onCategorySubmit} />
+        </div>
+        <div>
+         <RestaurantList foodEstablishments={this.state.foodEstablishments} />
+        </div>
       </div>
     );
   }
