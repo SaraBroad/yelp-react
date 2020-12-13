@@ -13,6 +13,7 @@ class App extends React.Component {
     selectedFoodEstablishmentId: null,
     isLoading: false,
     error: null,
+    comments: []
   };
 
   componentDidMount() {
@@ -44,14 +45,59 @@ class App extends React.Component {
   };
 
   onFoodEstablishmentSelect = (foodEstablishment) => {
-    // console.log("From the app", foodEstablishment);
-    this.setState({ 
-      selectedFoodEstablishment: foodEstablishment,
-      selectedFoodEstablishmentId: foodEstablishment.id
-    });
-    console.log('selectedFoodId', this.state.selectedFoodEstablishmentId )
-    console.log('selectedFood', this.state.selectedFoodEstablishment )
+    console.log('foodestinselect', foodEstablishment)
+    axios.get(
+      `${baseURL}/businesses/${foodEstablishment.id}/reviews`,
+      {
+        headers: {
+          mode: "no-cors",
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+          "Access-Control-Allow-Headers":
+            "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+          Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+        }
+      })
+      .then(res => {
+        console.log('res', res)
+        this.setState({
+          selectedFoodEstablishment: foodEstablishment,
+          comments: res.data.reviews
+        })
+      })
+    
+    // this.setState({ 
+    //   selectedFoodEstablishment: foodEstablishment,
+    //   selectedFoodEstablishmentId: foodEstablishment.id
+    // });
+    // console.log('COMMENTS', this.state.comments)
+    // console.log('selectedFoodId', this.state.selectedFoodEstablishmentId )
+    // console.log('selectedFood', this.state.selectedFoodEstablishment )
   };
+
+  getCommentsById = async () => {
+    const response = await axios.get(
+      `${baseURL}/businesses/ytynqOUb3hjKeJfRj5Tshw/reviews`,
+      {
+        headers: {
+          mode: "no-cors",
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+          "Access-Control-Allow-Headers":
+            "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+          Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+        }
+      }
+    )
+    // console.log(response)
+    this.setState({
+      comments: response.data.comments,
+      // selectedFoodEstablishment: response.data.businesses
+    });
+    console.log(this.state.comments)
+  }
 
   render() {
     return (
@@ -71,6 +117,7 @@ class App extends React.Component {
             <div className="eight wide column">
               <RestaurantList
                 onFoodEstablishmentSelect={this.onFoodEstablishmentSelect}
+                // getCommentsById={this.getCommentsById}
                 foodEstablishments={this.state.foodEstablishments}
                 
               />
@@ -79,6 +126,8 @@ class App extends React.Component {
               {/* Other Part */}
               <RestaurantDetail 
                 foodEstablishment={this.state.selectedFoodEstablishment}
+                comments={this.state.comments}
+                // getCommentsById={this.getCommentsById}
               />
             </div>
           </div>
