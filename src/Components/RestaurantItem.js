@@ -1,9 +1,26 @@
 import React from "react";
 
-const RestaurantItem = ({ establishment }) => {
+
+
+// const getFood = (establishment) => {
+//     establishment.transactions.map(e => {
+//         if (e.includes('delivery')) {
+//             console.log('Delivery Available')
+//             return <div>Delivery Available</div>
+//         }
+//         if (e.includes('pickup')) {
+//             console.log('Pickup Available')
+//             return <div>Pickup Available</div>
+//         }
+//     })
+// }
+
+const RestaurantItem = ({ establishment, onFoodEstablishmentSelect }) => {
+
     console.log('restaurant item', establishment)
+    
     return (
-        <div>
+        <div onClick={() => onFoodEstablishmentSelect(establishment)} className="ui segment">
             <div>
                  Name: {establishment.name} 
             </div>
@@ -13,11 +30,17 @@ const RestaurantItem = ({ establishment }) => {
             <div>
                 Rating: {establishment.rating}
             </div>
-            <div>
-                Pickup?: {establishment.transactions[0] === 'pickup' ? 'pickup' : 'no pickup'}
-            </div>
-            <div>
-                Delivery?: {establishment.transactions[1] === 'delivery' ? 'delivery' : 'no delivery'}
+            <div style={{  marginTop: "4px" }}>
+                How can I get my food?
+            <ul>
+                {establishment.transactions.map(e => {
+                    return (
+                        <div>
+                        <li>{e}</li>
+                        </div>
+                    )
+                })}
+                </ul>
             </div>
         </div>
     )
