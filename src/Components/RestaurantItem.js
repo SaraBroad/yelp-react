@@ -20,11 +20,9 @@ const RestaurantItem = ({ establishment, onFoodEstablishmentSelect }) => {
             <ul>
                 {establishment.transactions.map((e, index) => {
                     return (
-                        // <div>
                         <li key={index}>
                             {e}
                         </li>
-                        // </div>
                     )
                 })}
                 </ul>

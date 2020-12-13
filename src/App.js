@@ -39,7 +39,6 @@ class App extends React.Component {
     console.log("response", response.data.businesses);
     this.setState({
       foodEstablishments: response.data.businesses,
-      // selectedFoodEstablishment: response.data.businesses
     });
     console.log("fe", this.state.foodEstablishments);
   };
@@ -66,38 +65,7 @@ class App extends React.Component {
           comments: res.data.reviews
         })
       })
-    
-    // this.setState({ 
-    //   selectedFoodEstablishment: foodEstablishment,
-    //   selectedFoodEstablishmentId: foodEstablishment.id
-    // });
-    // console.log('COMMENTS', this.state.comments)
-    // console.log('selectedFoodId', this.state.selectedFoodEstablishmentId )
-    // console.log('selectedFood', this.state.selectedFoodEstablishment )
   };
-
-  getCommentsById = async () => {
-    const response = await axios.get(
-      `${baseURL}/businesses/ytynqOUb3hjKeJfRj5Tshw/reviews`,
-      {
-        headers: {
-          mode: "no-cors",
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
-          "Access-Control-Allow-Headers":
-            "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
-          Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
-        }
-      }
-    )
-    // console.log(response)
-    this.setState({
-      comments: response.data.comments,
-      // selectedFoodEstablishment: response.data.businesses
-    });
-    console.log(this.state.comments)
-  }
 
   render() {
     return (
@@ -123,11 +91,9 @@ class App extends React.Component {
               />
             </div>
             <div className="eight wide column">
-              {/* Other Part */}
               <RestaurantDetail 
                 foodEstablishment={this.state.selectedFoodEstablishment}
                 comments={this.state.comments}
-                // getCommentsById={this.getCommentsById}
               />
             </div>
           </div>

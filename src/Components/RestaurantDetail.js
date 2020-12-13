@@ -11,9 +11,6 @@ const RestaurantDetail = ({ foodEstablishment, comments }) => {
         )
     }
 
-    
-   
-
     return (
         <div>
             <h3 className="ui header" style={{ marginTop: '10px' }}>More information</h3>
