@@ -3,7 +3,11 @@ import React from "react";
 const RestaurantDetail = ({ foodEstablishment }) => {
     console.log('RestaurantDetail', foodEstablishment)
     if (!foodEstablishment) {
-        return <div>Loading...</div>
+        return ( 
+            <div className="ui header" style={{ marginTop: '10px' }}>
+                Loading...
+            </div>
+        )
     }
 
     return (

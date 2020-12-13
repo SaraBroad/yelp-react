@@ -10,6 +10,7 @@ class App extends React.Component {
   state = {
     foodEstablishments: [],
     selectedFoodEstablishment: null,
+    selectedFoodEstablishmentId: null,
     isLoading: false,
     error: null,
   };
@@ -43,9 +44,13 @@ class App extends React.Component {
   };
 
   onFoodEstablishmentSelect = (foodEstablishment) => {
-    console.log("From the app", foodEstablishment);
-    this.setState({ selectedFoodEstablishment: foodEstablishment });
-    console.log('selectedVideo', this.state.selectedFoodEstablishment )
+    // console.log("From the app", foodEstablishment);
+    this.setState({ 
+      selectedFoodEstablishment: foodEstablishment,
+      selectedFoodEstablishmentId: foodEstablishment.id
+    });
+    console.log('selectedFoodId', this.state.selectedFoodEstablishmentId )
+    console.log('selectedFood', this.state.selectedFoodEstablishment )
   };
 
   render() {
