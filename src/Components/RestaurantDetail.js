@@ -25,7 +25,7 @@ const RestaurantDetail = ({ foodEstablishment, comments }) => {
                      </li>
                  ))}    
                 </div>
-                <a target="_blank" href={foodEstablishment.url} style={{marginTop: '4px'}}>Get More Info</a>
+                <a href={foodEstablishment.url} target="_blank" rel="noopener noreferrer" style={{marginTop: '4px'}}>Get More Info</a>
             </div>
         </div>
     )
