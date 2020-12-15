@@ -4,7 +4,7 @@ import axios from "axios";
 import SearchBar from "./Components/SearchBar.js";
 import RestaurantList from "./Components/RestaurantList";
 import RestaurantDetail from './Components/RestaurantDetail'
-const baseURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3";
+export const baseURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3";
 
 class App extends React.Component {
   state = {
@@ -21,7 +21,6 @@ class App extends React.Component {
   }
 
   onCategorySubmit = async (term) => {
-    console.log("term", term);
     const response = await axios.get(
       `${baseURL}/businesses/search?location=philadelphia&categories=${term}&limit=10`,
       {
@@ -36,15 +35,12 @@ class App extends React.Component {
         }
       }
     );
-    console.log("response", response.data.businesses);
     this.setState({
       foodEstablishments: response.data.businesses,
     });
-    console.log("fe", this.state.foodEstablishments);
   };
 
   onFoodEstablishmentSelect = (foodEstablishment) => {
-    console.log('foodestinselect', foodEstablishment)
     axios.get(
       `${baseURL}/businesses/${foodEstablishment.id}/reviews`,
       {
@@ -59,7 +55,6 @@ class App extends React.Component {
         }
       })
       .then(res => {
-        console.log('res', res)
         this.setState({
           selectedFoodEstablishment: foodEstablishment,
           comments: res.data.reviews

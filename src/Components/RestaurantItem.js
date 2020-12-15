@@ -2,8 +2,6 @@ import React from "react";
 
 const RestaurantItem = ({ establishment, onFoodEstablishmentSelect }) => {
 
-    // console.log('restaurant item', establishment)
-    
     return (
         <div onClick={() => onFoodEstablishmentSelect(establishment)} className="ui segment">
             <div>

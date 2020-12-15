@@ -21,8 +21,9 @@ class SearchBar extends React.Component {
             <div className="search-bar ui segment">
                 <form onSubmit={this.onFormSubmit} className="ui form">
                     <div className="field">
-                        <label>What type of food do you want to eat?</label>
+                        <label htmlFor="typeInput">What type of food do you want to eat?</label>
                         <input 
+                        id="typeInput"
                         type="text" 
                         placeholder="Vietnamese, Indonesian, Pizza, etc..."
                         value={this.state.category}

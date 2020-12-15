@@ -1,8 +1,6 @@
 import React from "react";
 
 const RestaurantDetail = ({ foodEstablishment, comments }) => {
-    console.log('RestaurantDetail', foodEstablishment)
-    console.log('Commentsinresdetail', comments)
     if (!foodEstablishment) {
         return ( 
             <div className="ui header" style={{ marginTop: '10px' }}>
